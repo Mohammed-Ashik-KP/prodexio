@@ -42,7 +42,7 @@ const SideBar: React.FC = () => {
       <div
         className={`${
           isOpen ? "w-64" : "w-20"
-        } bg-white shadow-lg transition-all duration-300 relative h-screen`}
+        } bg-white shadow-lg transition-all duration-300 relative h-screen overflow-x-hidden`}
       >
         <div className="flex items-center p-4 border-b h-20">
           {isOpen && (

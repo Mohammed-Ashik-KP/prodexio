@@ -18,23 +18,21 @@ const Card: React.FC<CardProps> = ({
   wrapperClassName,
 }) => {
   return (
-   
-      <CardWrapper className={wrapperClassName || ""}>
-        <CardHeader>
-          <CardTitle>{title}</CardTitle>
-          <CardDescription>{description}</CardDescription>
-        </CardHeader>
-        <CardContent>{children}</CardContent>
-        {secondaryBtn || primaryBtn ? (
-          <CardFooter className="flex items-center justify-end gap-3">
-            {secondaryBtn}
-            {primaryBtn}
-          </CardFooter>
-        ) : (
-          <></>
-        )}
-      </CardWrapper>
-    
+    <CardWrapper className={wrapperClassName || ""}>
+      <CardHeader>
+        <CardTitle> {title}</CardTitle>
+        <CardDescription>{description}</CardDescription>
+      </CardHeader>
+      <CardContent>{children}</CardContent>
+      {secondaryBtn || primaryBtn ? (
+        <CardFooter className="flex items-center justify-end gap-3">
+          {secondaryBtn}
+          {primaryBtn}
+        </CardFooter>
+      ) : (
+        <></>
+      )}
+    </CardWrapper>
   );
 };
 

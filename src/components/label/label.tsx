@@ -1,14 +1,20 @@
-import { cn } from '@/lib/utils';
-import React from 'react';
-import { LabelProps } from './label.type';
+import { cn } from "@/lib/utils";
+import React, { ComponentProps } from "react";
+import { LabelProps } from "./label.type";
 
+const Label: React.FC<LabelProps & Partial<ComponentProps<"label">>> = ({
+  label,
+  className,
+  ...rest
+}) => {
+  return (
+    <label
+      className={cn("text-sm text-gray-600 font-medium", className)}
+      {...rest}
+    >
+      {label}
+    </label>
+  );
+};
 
-const Label:React.FC<LabelProps & Partial<HTMLDivElement>> = ({label,className}) => {
-    return ( 
-        <div className={cn('text-sm text-gray-600 font-medium',className)}>
-            {label}
-        </div>
-     );
-}
- 
 export default Label;

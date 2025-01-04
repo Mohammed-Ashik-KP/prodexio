@@ -9,6 +9,6 @@ export type ChipProps = {
   onRemove?: (id: string) => void;
   onClick?: (id: string) => void;
   variant?: ChipVariants;
-  theme?: 'DEFAULT' | 'SELECTED' | undefined
-  selected?: boolean
+  theme?: "DEFAULT" | "SELECTED" | undefined;
+  selected?: boolean;
 };
