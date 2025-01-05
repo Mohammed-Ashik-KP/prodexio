@@ -1,16 +1,19 @@
 "use client";
 
-import { cn } from "@/lib/utils";
+import { useLogin } from "@/api/hooks/auth";
 import { Button } from "@/components/button/button";
 import Card from "@/components/card/card";
 import Input from "@/components/input/input";
 import Label from "@/components/label/label";
+import { LoginFormType } from "@/types/api";
+import { useRouter } from "next/navigation";
 import { FieldValues, useForm } from "react-hook-form";
 
 const LoginForm: React.FC = () => {
   //constants
 
   //hooks
+  const router = useRouter();
   const {
     register,
     handleSubmit,
@@ -23,11 +26,22 @@ const LoginForm: React.FC = () => {
     reValidateMode: "onChange",
   });
 
+  const { mutateAsync: login, isPending } = useLogin();
+
   //states
 
   //fncs
-  const handle = (values) => {
-    console.log({ values });
+  const onSubmit = async (values: LoginFormType) => {
+    try {
+      const loginRes = await login(values);
+      if (loginRes.error === false) {
+        router.push("/app/task");
+      } else {
+        console.log(2, { loginRes });
+      }
+    } catch (error) {
+      console.error(111, error);
+    }
   };
 
   //effects
@@ -38,7 +52,7 @@ const LoginForm: React.FC = () => {
         title={<div className="text-2xl">Login</div>}
         description={"Enter your email below to login to your account"}
       >
-        <form>
+        <form onSubmit={handleSubmit(onSubmit)}>
           <div className="flex flex-col gap-6">
             <div className="grid gap-2">
               <Input
@@ -71,7 +85,12 @@ const LoginForm: React.FC = () => {
                 errors={errors}
               />
             </div>
-            <Button label="Login" type="submit" className="w-full" />
+            <Button
+              label="Login"
+              type="submit"
+              className="w-full"
+              isLoading={isPending}
+            />
             <Button
               label="Login With Google"
               variant="outline"

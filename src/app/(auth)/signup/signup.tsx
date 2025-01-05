@@ -1,8 +1,10 @@
 "use client";
 
+import { useSignup } from "@/api/hooks/auth";
 import { Button } from "@/components/button/button";
 import Card from "@/components/card/card";
 import Input from "@/components/input/input";
+import { SignupFormType } from "@/types/api";
 import { FieldValues, useForm } from "react-hook-form";
 
 const SignupForm: React.FC = () => {
@@ -23,11 +25,17 @@ const SignupForm: React.FC = () => {
     reValidateMode: "onChange",
   });
 
+  const signup = useSignup();
+
   //states
 
   //fncs
-  const handle = (values) => {
-    console.log({ values });
+  const handle = async (values: SignupFormType) => {
+    try {
+      await signup.mutateAsync(values);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   //effects

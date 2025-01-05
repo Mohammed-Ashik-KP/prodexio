@@ -28,12 +28,37 @@ export enum TaskEffortLevelValueEnum {
   "FULL_COMMITMNET" = 5,
 }
 
-
 export type SelectableOption<T> = {
-  label: string,
-  value: T,
-  id?: string | number
-} 
+  label: string;
+  value: T;
+  id?: string | number;
+};
 
 export type ChipVariants =
- "default" | "red" | "green" | "orange" | "yellow" | "blue" | "none" | null | undefined
+  | "default"
+  | "red"
+  | "green"
+  | "orange"
+  | "yellow"
+  | "blue"
+  | "none"
+  | null
+  | undefined;
+
+export type UserAuthType = {
+  id: string | null;
+  email: string | null;
+  name: string | null;
+  provider: string | null;
+};
+export type AuthStoreType = {
+  user: UserAuthType;
+  setUser: (user: UserAuthType) => void;
+};
+
+export type TaskType = {
+  title: string;
+  description?: string;
+  effortLevel: number;
+  priorityLevel: number;
+};
