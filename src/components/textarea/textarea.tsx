@@ -6,11 +6,12 @@ const TextareaBox: React.FC<TextareaProps & Partial<HTMLTextAreaElement>> = ({
   name,
   id,
   label,
-  onChange,
-  pattern,
   placeholder,
   inputClassName,
   rows = 5,
+  register,
+  required,
+  errors,
 }) => {
   //constants
 
@@ -20,19 +21,6 @@ const TextareaBox: React.FC<TextareaProps & Partial<HTMLTextAreaElement>> = ({
 
   //fncs
 
-  const handleOnChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    const value = e.target.value;
-
-    if (pattern) {
-      if (pattern.test(value)) {
-        onChange(value);
-      } else {
-        e.target.value = value;
-      }
-    } else {
-      onChange(value);
-    }
-  };
   //effects
   return (
     <div className="w-full">
@@ -44,13 +32,21 @@ const TextareaBox: React.FC<TextareaProps & Partial<HTMLTextAreaElement>> = ({
         {label}
       </div>
       <textarea
-        name={name}
         id={id}
-        onChange={handleOnChange}
+        {...(register &&
+          register(name, {
+            required: required
+              ? { message: "This Field Is Required", value: required }
+              : undefined,
+          }))}
+        name={name}
         placeholder={placeholder}
         className={`flex min-h-[60px] w-full rounded-md border border-input bg-transparent px-3 py-2 text-base shadow-sm placeholder:text-muted-foreground focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50 md:text-sm ${inputClassName}`}
         rows={rows}
       />
+      <div className="text-red-500 text-sm">
+        {errors ? errors[name]?.message?.toString() || "" : ""}
+      </div>
     </div>
   );
 };

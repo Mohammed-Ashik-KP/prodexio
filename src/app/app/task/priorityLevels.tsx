@@ -2,11 +2,19 @@ import Chip from "@/components/chip/chip";
 import Label from "@/components/label/label";
 import { TASK_PRIOTIY_LEVELS } from "@/lib/constants";
 import { PriorityLevelValueEnum, SelectableOption } from "@/types";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
-const PriorityLevels = () => {
+const PriorityLevels: React.FC<{
+  onSelect: (value: SelectableOption<PriorityLevelValueEnum> | null) => void;
+}> = ({ onSelect }) => {
   const [selectedLevel, setSelectedLevel] =
-    useState<SelectableOption<PriorityLevelValueEnum> | null>();
+    useState<SelectableOption<PriorityLevelValueEnum> | null>(null);
+
+  useEffect(() => {
+    if (onSelect) {
+      onSelect(selectedLevel);
+    }
+  }, [onSelect, selectedLevel]);
   return (
     <div className="space-y-2">
       <Label label="Choose Priority Level" />

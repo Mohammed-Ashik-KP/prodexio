@@ -1,12 +1,21 @@
 import Chip from "@/components/chip/chip";
 import Label from "@/components/label/label";
 import { TASK_EFFORT_LEVELS } from "@/lib/constants";
-import {  SelectableOption, TaskEffortLevelValueEnum } from "@/types";
-import React, { useState } from "react";
+import { SelectableOption, TaskEffortLevelValueEnum } from "@/types";
+import React, { useEffect, useState } from "react";
 
-const EffortLevels = () => {
+const EffortLevels: React.FC<{
+  onSelect: (value: SelectableOption<TaskEffortLevelValueEnum> | null) => void;
+}> = ({ onSelect }) => {
   const [selectedLevel, setSelectedLevel] =
-    useState<SelectableOption<TaskEffortLevelValueEnum> | null>();
+    useState<SelectableOption<TaskEffortLevelValueEnum> | null>(null);
+
+  useEffect(() => {
+    if (onSelect) {
+      onSelect(selectedLevel);
+    }
+  }, [onSelect, selectedLevel]);
+
   return (
     <div className="space-y-2">
       <Label label="Choose Effort Level" />
