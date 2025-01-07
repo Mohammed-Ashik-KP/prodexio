@@ -1,3 +1,4 @@
+import toast from "@/components/toast/toast";
 import axiosCore, {
   AxiosRequestHeaders,
   AxiosResponse,
@@ -53,6 +54,15 @@ axios.interceptors.response.use(
       localStorage.setItem("_rt", tokens.refreshToken);
     }
 
+    if (response?.data?.message) {
+      toast({
+        title: response.data.message,
+        options: {
+          type: "success",
+        },
+      });
+    }
+
     return response;
   },
   async (error) => {
@@ -86,6 +96,14 @@ axios.interceptors.response.use(
       // window.location.href = "/login"; // Redirect user to login
     }
 
+    if (error.response?.data?.message) {
+      toast({
+        title: error.response.data.message,
+        options: {
+          type: "error",
+        },
+      });
+    }
     return Promise.reject(error);
   }
 );
