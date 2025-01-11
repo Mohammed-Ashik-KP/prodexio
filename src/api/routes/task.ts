@@ -1,10 +1,19 @@
 import { axios } from "@/lib/axios";
+import { TaskType } from "@/types";
 
-export const createTask = async (payload) => {
-  const response = await axios.post("/task", payload);
-  return response.data;
+export const createTask = async (payload: TaskType) => {
+  try {
+    const response = await axios.post("/task", payload);
+    return response.data;
+  } catch (error) {
+    console.error(error);
+  }
 };
 export const getTasks = async () => {
-  const response = await axios.get("/tasks");
-  return response.data;
+  try {
+    const response = await axios.get("/tasks");
+    return response.data;
+  } catch (error) {
+    console.error(error);
+  }
 };

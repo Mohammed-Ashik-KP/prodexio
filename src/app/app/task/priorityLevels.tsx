@@ -1,20 +1,26 @@
 import Chip from "@/components/chip/chip";
 import Label from "@/components/label/label";
 import { TASK_PRIOTIY_LEVELS } from "@/lib/constants";
-import { PriorityLevelValueEnum, SelectableOption } from "@/types";
+import { PriorityLevelValueEnum } from "@/types";
 import React, { useEffect, useState } from "react";
 
 const PriorityLevels: React.FC<{
-  onSelect: (value: SelectableOption<PriorityLevelValueEnum> | null) => void;
-}> = ({ onSelect }) => {
+  value?: PriorityLevelValueEnum | null;
+  onSelect: (value: PriorityLevelValueEnum | null) => void;
+}> = ({ onSelect, value }) => {
   const [selectedLevel, setSelectedLevel] =
-    useState<SelectableOption<PriorityLevelValueEnum> | null>(null);
+    useState<PriorityLevelValueEnum | null>(null);
 
   useEffect(() => {
     if (onSelect) {
       onSelect(selectedLevel);
     }
   }, [onSelect, selectedLevel]);
+
+  useEffect(() => {
+    setSelectedLevel(value || null);
+  }, [value]);
+
   return (
     <div className="space-y-2">
       <Label label="Choose Priority Level" />
@@ -25,16 +31,16 @@ const PriorityLevels: React.FC<{
               key={`task_${level.label}`}
               id={level.label}
               label={level.label}
-              selected={selectedLevel?.value === level.value}
+              selected={selectedLevel === level.value}
               onClick={() => {
-                if (selectedLevel?.value === level.value) {
+                if (selectedLevel === level.value) {
                   setSelectedLevel(null);
                 } else {
-                  setSelectedLevel({ label: level.label, value: level.value });
+                  setSelectedLevel(level.value);
                 }
               }}
               variant={level.theme}
-              showCloseButton={selectedLevel?.value === level.value}
+              showCloseButton={selectedLevel === level.value}
             />
           );
         })}

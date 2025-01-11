@@ -9,8 +9,6 @@ import TaskHeader from "./header";
 import PriorityLevels from "./priorityLevels";
 import { useForm } from "react-hook-form";
 import { useCreateTask } from "@/api/hooks/task";
-import { TaskType } from "@/types";
-import toast from "react-hot-toast";
 
 const TaskPage = () => {
   //constants
@@ -21,19 +19,25 @@ const TaskPage = () => {
     register,
     handleSubmit,
     setValue,
+    reset,
+    getValues,
     formState: { errors },
-  } = useForm();
+  } = useForm({});
 
-  const { mutate: createTask, isPending } = useCreateTask();
+  const { mutateAsync: createTask, isPending } = useCreateTask();
 
   //states
 
   //fncs
-  const onSubmit = (values: TaskType) => {
-    try {
-      createTask(values);
-    } catch (error) {
-      console.log(error);
+  const onSubmit = async (values) => {
+    const response = await createTask(values);
+    if (!response.error) {
+      reset({
+        title: "",
+        description: "",
+        effortLevel: "",
+        priorityLevel: "",
+      });
     }
   };
 
@@ -64,36 +68,27 @@ const TaskPage = () => {
           <div className="flex flex-col gap-y-4">
             <div>
               <PriorityLevels
+                value={getValues().priorityLevel}
                 onSelect={(value) => {
-                  setValue("priorityLevel", value?.value);
+                  setValue("priorityLevel", value);
                 }}
               />
             </div>
 
             <div>
               <EffortLevels
+                value={getValues().effortLevel}
                 onSelect={(value) => {
-                  setValue("effortLevel", value?.value);
+                  setValue("effortLevel", value);
                 }}
               />
             </div>
           </div>
-          {/* <Checkbox
-            id="checkbox"
-            name="checkbox"
-            onChange={(v) => {
-              setchecked(v);
-            }}
-            label="Agree with this"
-            checked={checked}
-          /> */}
           <div className="flex items-center justify-end my-4">
             <Button
               label="Add Task"
               type="submit"
-              onClick={() => {
-                toast("taks", {});
-              }}
+              onClick={handleSubmit(onSubmit)}
               isLoading={isPending}
             />
           </div>
