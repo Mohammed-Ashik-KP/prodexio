@@ -41,7 +41,7 @@ const UserEnergyAnalysis = () => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center w-full h-full">
+    <div className="flex flex-col items-center justify-center w-full h-full p-2">
       <div className="relative w-full min-h-40 h-full overflow-hidden">
         <AnimatePresence custom={direction}>
           <motion.div
@@ -54,7 +54,8 @@ const UserEnergyAnalysis = () => {
             variants={variants}
             transition={{ duration: 0.5 }}
           >
-            <div className="text-xl font-medium">
+            <div className="text-3xl font-medium">
+              {currentQuestionIndex + 1}.{" "}
               {questions[currentQuestionIndex]?.question}
             </div>
 

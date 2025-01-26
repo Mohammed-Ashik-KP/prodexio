@@ -11,7 +11,7 @@ const Modal: React.FC<ModalPropType> & {
     <div className="fixed inset-0 z-50 bg-black bg-opacity-60 backdrop-blur-sm">
       <div className="bg-white rounded-lg shadow-lg w-full max-w-2xl mx-4 relative left-1/2 top-40 transform -translate-x-1/2 ">
         <div className="border-b border-gray-200 p-3">
-          <div className="flex justify-between items-center">
+          <div className="flex justify-between items-center p-2">
             <h2 className="text-lg font-medium text-primary capitalize">
               {title}
             </h2>
