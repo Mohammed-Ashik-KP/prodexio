@@ -15,13 +15,17 @@ const CutsomToast: React.FC<CustomToastProps> = ({
       <div className="flex items-center w-full justify-between gap-2">
         <div className="">
           <p className="text-base text-gray-800 leading-normal">{title}</p>
-          <p className="mt-1 text-sm text-gray-500">{description}</p>
+          {description ? (
+            <p className="mt-1 text-sm text-gray-500">{description}</p>
+          ) : (
+            <></>
+          )}
         </div>
         <button
           onClick={() => originalToast.remove(toastInstance.id)}
-          className="w-max border border-transparent rounded-none rounded-r-lg flex items-center justify-center text-sm font-medium text-slate-700 hover:text-indigo-600"
+          className="w-max border border-transparent rounded-none rounded-r-lg flex items-center justify-center font-medium text-slate-700 hover:text-indigo-600"
         >
-          <X />
+          <X size={16} />
         </button>
       </div>
     </div>

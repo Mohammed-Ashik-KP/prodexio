@@ -5,7 +5,7 @@ import { useSidebarStore } from "@/components/sideBar/sideBar.store";
 import React from "react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import WithAuthHOC from "@/hoc/withAuth";
-import { resolveValue, Toaster } from "react-hot-toast";
+import { Toaster } from "react-hot-toast";
 const DashboardLayout: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
@@ -34,7 +34,6 @@ const DashboardLayout: React.FC<{ children: React.ReactNode }> = ({
           position="top-right"
           toastOptions={{
             duration: 2000,
-
             success: {
               duration: 1600,
             },

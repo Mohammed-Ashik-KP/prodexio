@@ -40,7 +40,6 @@ const PriorityLevels: React.FC<{
                 }
               }}
               variant={level.theme}
-              showCloseButton={selectedLevel === level.value}
             />
           );
         })}

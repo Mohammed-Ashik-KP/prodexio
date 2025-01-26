@@ -11,4 +11,5 @@ export type ChipProps = {
   variant?: ChipVariants;
   theme?: "DEFAULT" | "SELECTED" | undefined;
   selected?: boolean;
+  compact?: boolean;
 };

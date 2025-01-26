@@ -11,6 +11,7 @@ const Chip: React.FC<ChipProps> = ({
   onClick,
   onRemove,
   selected,
+  compact = false,
 }) => {
   return (
     <>
@@ -25,8 +26,9 @@ const Chip: React.FC<ChipProps> = ({
         }}
       >
         <div className="flex items-center gap-2">
-          {" "}
-          <span>{label}</span>{" "}
+          <span className={`${compact ? "text-xs" : "text-base"}`}>
+            {label}
+          </span>{" "}
           {showCloseButton ? (
             <span>
               <X

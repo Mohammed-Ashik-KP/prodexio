@@ -23,7 +23,7 @@ const PriorityLevels: React.FC<{
 
   return (
     <div className="space-y-2">
-      <Label label="Choose Priority Level" />
+      <Label label="Choose Effort Level" />
       <div className="flex items-center gap-3 flex-wrap">
         {TASK_EFFORT_LEVELS.map((level) => {
           return (
@@ -40,7 +40,6 @@ const PriorityLevels: React.FC<{
                 }
               }}
               variant={level.theme}
-              showCloseButton={selectedLevel === level.value}
             />
           );
         })}

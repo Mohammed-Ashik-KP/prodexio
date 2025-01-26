@@ -14,6 +14,7 @@ const DataTable: React.FC<DataTableProps> = ({
   className,
   columns,
   data,
+  isLoading = true,
 }) => {
   return (
     <div className="data-table border rounded-md" id={id}>
@@ -30,19 +31,34 @@ const DataTable: React.FC<DataTableProps> = ({
           </TableRow>
         </TableHeader>
         <TableBody>
-          {data?.map((datum,rowIndex) => (
-            <TableRow key={`row_${id}_${datum.id}`}>
-              {columns.map((column) => {
-                return (
-                  <>
-                    <TableCell  key={`col_${column.id}_${rowIndex}`} className="font-medium">
-                      {column.render ? <div>{column.render(datum[column.id])}</div>  :<div>{datum[column?.id]}</div>}
-                    </TableCell>
-                  </>
-                );
-              })}
+          {isLoading ? (
+            <TableRow>
+              <TableCell className="text-center" colSpan={columns.length}>
+                Loading
+              </TableCell>
             </TableRow>
-          ))}
+          ) : (
+            data?.map((datum, rowIndex) => (
+              <TableRow key={`row_${id}_${datum.id}`}>
+                {columns.map((column) => {
+                  return (
+                    <>
+                      <TableCell
+                        key={`col_${column.id}_${rowIndex}`}
+                        className="font-medium"
+                      >
+                        {column.render ? (
+                          <div>{column.render(datum[column.id])}</div>
+                        ) : (
+                          <div>{datum[column?.id]}</div>
+                        )}
+                      </TableCell>
+                    </>
+                  );
+                })}
+              </TableRow>
+            ))
+          )}
         </TableBody>
       </Table>
     </div>

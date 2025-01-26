@@ -13,8 +13,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         {...props}
         disabled={disabled || isLoading}
       >
-        {isLoading ? <LoaderCircle className="animate-spin" /> : <></>}{" "}
-        {label}
+        {isLoading ? <LoaderCircle className="animate-spin" /> : <></>} {label}
       </button>
     );
   }

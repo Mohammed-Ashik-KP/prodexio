@@ -1,38 +1,31 @@
 import React from "react";
-import {
-  LayoutDashboard,
-  LayoutList,
-  Menu
-} from "lucide-react";
+import { LayoutDashboard, LayoutList, Menu } from "lucide-react";
 import { useSidebarStore } from "./sideBar.store";
 import { SideBarMenuType } from "./sideBar.types";
-import SidebarItem from './sideBarItem';
+import SidebarItem from "./sideBarItem";
 
 const SideBar: React.FC = () => {
   //constants
 
-  const menuOptions:SideBarMenuType[] = [
+  const menuOptions: SideBarMenuType[] = [
     {
-      name: 'Dashboard',
-      url: '/dashboard',
-      id:'dashboard',
-      icon: <LayoutDashboard size={20} />
+      name: "Dashboard",
+      url: "/dashboard",
+      id: "dashboard",
+      icon: <LayoutDashboard size={20} />,
     },
     {
-      name: 'Assignments',
-      url: '/assignments',
-      id:'assignments',
+      name: "Assignments",
+      url: "/assignments",
+      id: "assignments",
       icon: <LayoutList strokeWidth={1.5} />,
-     
     },
-   
-  ]
+  ];
 
   //hooks
-  const { isOpen, toggleSidebar,selectedMenu } = useSidebarStore();
+  const { isOpen, toggleSidebar, selectedMenu } = useSidebarStore();
 
   //states
-  
 
   //fncs
 
@@ -42,7 +35,7 @@ const SideBar: React.FC = () => {
       <div
         className={`${
           isOpen ? "w-64" : "w-20"
-        } bg-white shadow-lg transition-all duration-300 relative h-screen overflow-x-hidden`}
+        } bg-white shadow-lg transition-all duration-300 relative h-screen overflow-y-auto overflow-x-hidden`}
       >
         <div className="flex items-center p-4 border-b h-20">
           {isOpen && (
@@ -64,9 +57,16 @@ const SideBar: React.FC = () => {
 
         <nav className="p-4">
           {menuOptions.map((menu, i) => {
-            return <SidebarItem key={`side_menu_${i}`} icon={menu.icon} text={menu.name} active={selectedMenu === menu.id} />
+            return (
+              <SidebarItem
+                key={`side_menu_${i}`}
+                icon={menu.icon}
+                text={menu.name}
+                active={selectedMenu === menu.id}
+              />
+            );
           })}
-        </nav> 
+        </nav>
       </div>
     </>
   );

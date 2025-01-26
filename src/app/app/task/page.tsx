@@ -1,7 +1,6 @@
 "use client";
 
 import { Button } from "@/components/button/button";
-import Checkbox from "@/components/checkbox/checkbox";
 import Input from "@/components/input/input";
 import TextareaBox from "@/components/textarea/textarea";
 import EffortLevels from "./effortLevels";
@@ -49,7 +48,7 @@ const TaskPage = () => {
         <div className="flex flex-col max-w-screen-md w-full gap-3 rounded-lg bg-white p-4 shadow-md">
           <Input
             name="title"
-            label="Add You New Task"
+            label="Task Title"
             className="w-full"
             register={register}
             errors={errors}
@@ -58,7 +57,7 @@ const TaskPage = () => {
 
           <TextareaBox
             name="description"
-            label="Description"
+            label="Describe Your Task"
             className="w-full"
             register={register}
             errors={errors}
@@ -94,25 +93,6 @@ const TaskPage = () => {
           </div>
         </div>
       </div>
-      {/* <div className="w-full">
-        <DataTable
-          columns={[
-            {
-              header: "Name",
-              id: "name",
-            },
-            {
-              header: "Age",
-              id: "age",
-            },
-          ]}
-          data={[
-            { name: "John", age: 12, id: "1" },
-            { name: "John2", age: 13, id: "2" },
-          ]}
-          id="tasks"
-        />
-      </div> */}
     </div>
   );
 };
