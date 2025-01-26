@@ -23,7 +23,7 @@ const Modal: React.FC<ModalPropType> & {
               <X />
             </button>
           </div>
-          <div className="text-sm text-gray-600 w-full break-words my-1">
+          <div className="text-xs text-gray-600 w-full break-words mt-2 mb-1 max-w-[80%]">
             {description}
           </div>
         </div>
